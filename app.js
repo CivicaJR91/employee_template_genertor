@@ -32,8 +32,13 @@ const employeeQuestions = () => {
             message: 'Enter your employee id',
         },
 
-    ]);
-}
+    ])
+    .then(answers => {
+        rolesQuestions();
+        console.log(answers)
+    })
+} 
+employeeQuestions();
 
 const rolesQuestions = () => {
     inquirer.prompt([
@@ -45,11 +50,10 @@ const rolesQuestions = () => {
                 "Itern",
                 "Manager"]
         }
-    ]).then((answers)=>{
-
- // After user select a profile, look at what type profile was selected 
-// Prompt the correct questions.
-        if (answers.profile === "Engineer"){
+    ]).then(answers => {
+        //After user select a profile, look at what type profile was selected 
+        //Prompt the correct questions.
+        if (answers.profile === "Engineer") {
             return inquirer.prompt([
                 {
                     type: 'input',
@@ -74,20 +78,33 @@ const rolesQuestions = () => {
                     name: 'engineergithub',
                     message: 'Enter your GitHub Username',
                 },
-               
-            ])
-        }
+                {
+                    type: 'confirm',
+                    name: 'anotherprole',
+                    message: 'Would you like create another profile?',
+                },
 
+            ]).then(response => {
+                console.log(response);
+            })
+        }
     })
 }
 
 
-employeeQuestions()
-    .then((answers) => writeFileAsync('team.html', generateHTML(answers)))
-    .then(() => console.log('Successfully wrote to index.html'))
-    .catch((err) => console.error(err));
 
-render();
+
+// employeeQuestions()
+//     .then((answers) => {
+
+//     }
+    
+    
+//     writeFileAsync('team.html', generateHTML(answers)))
+//     .then(() => console.log('Your Team Was Created'))
+//     .catch((err) => console.error(err));
+
+
 
 
 
