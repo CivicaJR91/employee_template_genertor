@@ -13,37 +13,12 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-
-const employeeQuestions = () => {
-    return inquirer.prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: 'Enter your name',
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: 'Enter your email address',
-        },
-        {
-            type: 'input',
-            name: 'id',
-            message: 'Enter your employee id',
-        },
-
-    ])
-    .then(answers => {
-        rolesQuestions();
-        console.log(answers)
-    })
-} 
-employeeQuestions();
+//Prompt first question, select a profile
 
 const rolesQuestions = () => {
     inquirer.prompt([
         {
-            type: 'checkbox',
+            type: 'list',
             name: 'profile',
             message: 'Select A Profile',
             choices: ["Engineer",
@@ -53,7 +28,7 @@ const rolesQuestions = () => {
     ]).then(answers => {
         //After user select a profile, look at what type profile was selected 
         //Prompt the correct questions.
-        if (answers.profile === "Engineer") {
+        if (answers.profile[0] === "Engineer") {
             return inquirer.prompt([
                 {
                     type: 'input',
@@ -82,29 +57,14 @@ const rolesQuestions = () => {
                     type: 'confirm',
                     name: 'anotherprole',
                     message: 'Would you like create another profile?',
-                },
+                }
 
-            ]).then(response => {
-                console.log(response);
-            })
+            ])
         }
+        else{}
     })
 }
-
-
-
-
-// employeeQuestions()
-//     .then((answers) => {
-
-//     }
-    
-    
-//     writeFileAsync('team.html', generateHTML(answers)))
-//     .then(() => console.log('Your Team Was Created'))
-//     .catch((err) => console.error(err));
-
-
+rolesQuestions();
 
 
 
