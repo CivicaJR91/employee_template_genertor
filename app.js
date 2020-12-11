@@ -9,6 +9,9 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const { type } = require("os");
+
+let profile = [];
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -22,13 +25,13 @@ const rolesQuestions = () => {
             name: 'profile',
             message: 'Select A Profile',
             choices: ["Engineer",
-                "Itern",
+                "Intern",
                 "Manager"]
         }
     ]).then(answers => {
         //After user select a profile, look at what type profile was selected 
         //Prompt the correct questions.
-        if (answers.profile[0] === "Engineer") {
+        if (answers.profile === "Engineer") {
             return inquirer.prompt([
                 {
                     type: 'input',
@@ -55,13 +58,80 @@ const rolesQuestions = () => {
                 },
                 {
                     type: 'confirm',
-                    name: 'anotherprole',
+                    name: 'anotherprofile',
                     message: 'Would you like create another profile?',
                 }
 
+            ]).then(answers => {
+                if (answers.anotherprofile === "true"){
+                    rolesQuestions();
+                }
+            })
+        }
+
+        if (answers.profile === "Intern") {
+            return inquirer.prompt([
+                {
+                    type: "input",
+                    name: "internname",
+                    message: "enter intern name"
+                },
+                {
+                    type: 'input',
+                    name: 'internemail',
+                    message: 'Enter Email',
+                },
+
+                {
+                    type: 'input',
+                    name: 'internid',
+                    message: 'Enter id',
+                },
+
+                {
+                    type: 'input',
+                    name: 'school',
+                    message: 'Enter school name',
+                },
+                {
+                    type: 'confirm',
+                    name: 'anotherprole',
+                    message: 'Would you like create another profile?',
+                }
             ])
         }
-        else{}
+
+        if (answers.profile === "Manager") {
+            return inquirer.prompt([
+                {
+                    type: "input",
+                    name: "managername",
+                    message: "enter manager name"
+                },
+                {
+                    type: 'input',
+                    name: 'manageremail',
+                    message: 'Enter Email',
+                },
+
+                {
+                    type: 'input',
+                    name: 'managerid',
+                    message: 'Enter id',
+                },
+
+                {
+                    type: 'input',
+                    name: 'phone',
+                    message: 'Enter phone',
+                },
+                {
+                    type: 'confirm',
+                    name: 'anotherprole',
+                    message: 'Would you like create another profile?',
+                }
+            ])
+        }
     })
 }
 rolesQuestions();
