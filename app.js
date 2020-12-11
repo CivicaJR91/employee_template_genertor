@@ -9,11 +9,10 @@ const OUTPUT_DIR = path.resolve(__dirname, "output"); // directiory where the HT
 const outputPath = path.join(OUTPUT_DIR, "team.html"); // HTML file name that will be created
 
 const render = require("./lib/htmlRenderer"); // referencing htmlRender.js document
-const { type } = require("os");
+const { type } = require("os");// identify the operating system
 
 let profile = [];
-
-
+console.log(profile);
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -73,6 +72,8 @@ const rolesQuestions = () => {
                 let engineer = new Engineer (answers.engineername, answers.engineeremail, answers.engineereid, answers.engineergithub);
                 console.log(engineer);
                 profile.push(engineer);
+
+                
                
             })
         } 
@@ -113,8 +114,9 @@ const rolesQuestions = () => {
                     rolesQuestions();
                 }
                 // after each answer create a new Intern variable
-                let intern = new Intern (answers.internname, answers.nternemail, answers.internid, answers.school);
-                
+                let intern = new Intern (answers.internname, answers.internemail, answers.internid, answers.school);
+                console.log(intern);
+                profile.push(intern);
             })
         }
 
@@ -155,16 +157,33 @@ const rolesQuestions = () => {
                 }
 
                 // after each answer create a new Manager variable
-                let manager= new Manager (answers.managername, answers.managerid, answers.mangeremail, answers.phone);
+                let manager= new Manager (answers.managername, answers.managerid, answers.manageremail, answers.phone);
+                console.log(manager);
+                profile.push(manager);
             })
         }
+        
+        
     }) // call the render function to generate to call the HTML Render JS file
     
-   
+    
+    
 }
 
 rolesQuestions()
-    //get all the 
+
+console.log(profile);
+
+const renderedHTML = render(profile)
+fs.writeFile(outputPath, renderedHTML, (err)=> {
+    if(err) console.log(err)
+    console.log('YOU WROTE SOME HTML INTO THE ' + outputPath + 'FOLDER!!!')
+
+    
+})
+
+
+    
 
 
 
