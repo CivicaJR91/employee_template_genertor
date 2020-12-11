@@ -57,13 +57,14 @@ const rolesQuestions = () => {
                     message: 'Enter your GitHub Username',
                 },
                 {
-                    type: 'confirm',
+                    type: 'list',
                     name: 'anotherprofile',
                     message: 'Would you like create another profile?',
+                    choices: ["Yes", "No"]
                 }
 
             ]).then(answers => {
-                if (answers.anotherprofile === "true"){
+                if (answers.anotherprofile === "Yes"){
                     rolesQuestions();
                 }
             })
