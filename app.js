@@ -5,13 +5,14 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+const OUTPUT_DIR = path.resolve(__dirname, "output"); // directiory where the HTML file be created
+const outputPath = path.join(OUTPUT_DIR, "team.html"); // HTML file name that will be created
 
-const render = require("./lib/htmlRenderer");
+const render = require("./lib/htmlRenderer"); // referencing htmlRender.js document
 const { type } = require("os");
 
 let profile = [];
+
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -46,7 +47,7 @@ const rolesQuestions = () => {
                 },
 
                 {
-                    type: 'input',
+                    type: 'input', 
                     name: 'engineereid',
                     message: 'Enter id',
                 },
@@ -61,14 +62,20 @@ const rolesQuestions = () => {
                     name: 'anotherprofile',
                     message: 'Would you like create another profile?',
                     choices: ["Yes", "No"]
-                }
+                } // if user select Yes, prompt rolesQuestions
 
             ]).then(answers => {
                 if (answers.anotherprofile === "Yes"){
                     rolesQuestions();
                 }
+                // after each answer create a new Engineer variable
+                // push values into the profile array
+                let engineer = new Engineer (answers.engineername, answers.engineeremail, answers.engineereid, answers.engineergithub);
+                console.log(engineer);
+                profile.push(engineer);
+               
             })
-        }
+        } 
 
         if (answers.profile === "Intern") {
             return inquirer.prompt([
@@ -95,11 +102,20 @@ const rolesQuestions = () => {
                     message: 'Enter school name',
                 },
                 {
-                    type: 'confirm',
-                    name: 'anotherprole',
+                    type: 'list',
+                    name: 'anotherprofile',
                     message: 'Would you like create another profile?',
+                    choices: ["Yes", "No"]
                 }
-            ])
+                // if user select Yes, prompt rolesQuestions
+            ]).then(answers => {
+                if (answers.anotherprofile === "Yes"){
+                    rolesQuestions();
+                }
+                // after each answer create a new Intern variable
+                let intern = new Intern (answers.internname, answers.nternemail, answers.internid, answers.school);
+                
+            })
         }
 
         if (answers.profile === "Manager") {
@@ -127,21 +143,39 @@ const rolesQuestions = () => {
                     message: 'Enter phone',
                 },
                 {
-                    type: 'confirm',
-                    name: 'anotherprole',
+                    type: 'list',
+                    name: 'anotherprofile',
                     message: 'Would you like create another profile?',
+                    choices: ["Yes", "No"]
                 }
-            ])
+                // if user select Yes, prompt rolesQuestions
+            ]).then(answers => {
+                if (answers.anotherprofile === "Yes"){
+                    rolesQuestions();
+                }
+
+                // after each answer create a new Manager variable
+                let manager= new Manager (answers.managername, answers.managerid, answers.mangeremail, answers.phone);
+            })
         }
-    })
+    }) // call the render function to generate to call the HTML Render JS file
+    
+   
 }
-rolesQuestions();
+
+rolesQuestions()
+    //get all the 
+
+
+
 
 
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
+
+
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
