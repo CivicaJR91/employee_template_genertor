@@ -12,7 +12,9 @@ const render = require("./lib/htmlRenderer"); // referencing htmlRender.js docum
 const { type } = require("os");// identify the operating system
 
 let profile = [];
-console.log(profile);
+
+
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -46,7 +48,7 @@ const rolesQuestions = () => {
                 },
 
                 {
-                    type: 'input', 
+                    type: 'input',
                     name: 'engineereid',
                     message: 'Enter id',
                 },
@@ -64,19 +66,28 @@ const rolesQuestions = () => {
                 } // if user select Yes, prompt rolesQuestions
 
             ]).then(answers => {
-                if (answers.anotherprofile === "Yes"){
-                    rolesQuestions();
-                }
+
                 // after each answer create a new Engineer variable
                 // push values into the profile array
-                let engineer = new Engineer (answers.engineername, answers.engineeremail, answers.engineereid, answers.engineergithub);
-                console.log(engineer);
+                let engineer = new Engineer(answers.engineername, answers.engineeremail, answers.engineereid, answers.engineergithub);
+                // console.log(engineer);
                 profile.push(engineer);
+                console.log(profile);
 
-                
-               
+                if (answers.anotherprofile === "Yes") {
+                    rolesQuestions();
+                }
+
+                else {
+                    const renderedHTML = render(profile)
+                    fs.writeFile(outputPath, renderedHTML, (err) => {
+                        if (err) console.log(err)
+                        console.log('YOU WROTE SOME HTML INTO THE ' + outputPath + 'FOLDER!!!')
+                    })
+                }
             })
-        } 
+
+        }
 
         if (answers.profile === "Intern") {
             return inquirer.prompt([
@@ -110,13 +121,13 @@ const rolesQuestions = () => {
                 }
                 // if user select Yes, prompt rolesQuestions
             ]).then(answers => {
-                if (answers.anotherprofile === "Yes"){
+                if (answers.anotherprofile === "Yes") {
                     rolesQuestions();
                 }
                 // after each answer create a new Intern variable
-                let intern = new Intern (answers.internname, answers.internemail, answers.internid, answers.school);
+                let intern = new Intern(answers.internname, answers.internemail, answers.internid, answers.school);
                 console.log(intern);
-                profile.push(intern);
+                // profile.push(intern);
             })
         }
 
@@ -152,41 +163,54 @@ const rolesQuestions = () => {
                 }
                 // if user select Yes, prompt rolesQuestions
             ]).then(answers => {
-                if (answers.anotherprofile === "Yes"){
+                if (answers.anotherprofile === "Yes") {
                     rolesQuestions();
                 }
 
                 // after each answer create a new Manager variable
-                let manager= new Manager (answers.managername, answers.managerid, answers.manageremail, answers.phone);
+                let manager = new Manager(answers.managername, answers.managerid, answers.manageremail, answers.phone);
                 console.log(manager);
-                profile.push(manager);
+                // profile.push(manager);
             })
         }
-        
-        
-    }) // call the render function to generate to call the HTML Render JS file
-    
-    
-    
+
+    })
+
 }
-
-rolesQuestions()
-
-console.log(profile);
-
-const renderedHTML = render(profile)
-fs.writeFile(outputPath, renderedHTML, (err)=> {
-    if(err) console.log(err)
-    console.log('YOU WROTE SOME HTML INTO THE ' + outputPath + 'FOLDER!!!')
-
-    
-})
+rolesQuestions();
 
 
-    
+    // const renderedHTML = render(profile)
+    // fs.writeFile(outputPath, renderedHTML, (err)=> {
+    //     if(err) console.log(err)
+    //     console.log('YOU WROTE SOME HTML INTO THE ' + outputPath + 'FOLDER!!!')
+
+
+    // })
+
+    // .then function  hmtFile(profile);
+
+
+    // function hmtFile() {
+    //     const renderedHTML = render(profile)
+    //     console.log(renderedHTML);
+    // }
+
+
+    //         fs.writeFile(outputPath, renderedHTML, (err)=> {
+    //         console.log(renderedHTML)
+    //         if(err) console.log(err)
+    //         console.log('YOU WROTE SOME HTML INTO THE ' + outputPath + 'FOLDER!!!')
+    // })
 
 
 
+//     const renderedHTML = render(profile)
+
+//     fs.writeFileAsync(outputPath, renderedHTML, (err)=> {
+//         if(err) console.log(err)
+//         console.log('YOU WROTE SOME HTML INTO THE ' + outputPath + 'FOLDER!!!')
+// })
 
 
 
