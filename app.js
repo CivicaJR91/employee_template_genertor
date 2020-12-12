@@ -121,13 +121,23 @@ const rolesQuestions = () => {
                 }
                 // if user select Yes, prompt rolesQuestions
             ]).then(answers => {
+                
+                // after each answer create a new Intern variable
+                let intern = new Intern(answers.internname, answers.internemail, answers.internid, answers.school);
+                // console.log(intern);
+                profile.push(intern);
+
                 if (answers.anotherprofile === "Yes") {
                     rolesQuestions();
                 }
-                // after each answer create a new Intern variable
-                let intern = new Intern(answers.internname, answers.internemail, answers.internid, answers.school);
-                console.log(intern);
-                // profile.push(intern);
+                else {
+                    const renderedHTML = render(profile)
+                    fs.writeFile(outputPath, renderedHTML, (err) => {
+                        if (err) console.log(err)
+                        console.log('YOU WROTE SOME HTML INTO THE ' + outputPath + 'FOLDER!!!')
+                    })
+                }
+
             })
         }
 
@@ -163,14 +173,22 @@ const rolesQuestions = () => {
                 }
                 // if user select Yes, prompt rolesQuestions
             ]).then(answers => {
+                // after each answer create a new Manager variable
+                let manager = new Manager(answers.managername, answers.managerid, answers.manageremail, answers.phone);
+                // console.log(manager);
+                profile.push(manager);
+
                 if (answers.anotherprofile === "Yes") {
                     rolesQuestions();
                 }
 
-                // after each answer create a new Manager variable
-                let manager = new Manager(answers.managername, answers.managerid, answers.manageremail, answers.phone);
-                console.log(manager);
-                // profile.push(manager);
+                else {
+                    const renderedHTML = render(profile)
+                    fs.writeFile(outputPath, renderedHTML, (err) => {
+                        if (err) console.log(err)
+                        console.log('YOU WROTE SOME HTML INTO THE ' + outputPath + 'FOLDER!!!')
+                    })
+                }
             })
         }
 
