@@ -38,16 +38,22 @@ const rolesQuestions = () => {
                     message: 'Enter Engineer Name',
                 },
 
-                {
-                    type: 'input',
-                    name: 'engineeremail',
-                    message: 'Enter Engineer Email',
-                },
+                // {
+                //     type: 'input',
+                //     name: 'engineeremail',
+                //     message: 'Enter Engineer Email',
+                // },
 
                 {
                     type: 'input',
                     name: 'engineereid',
                     message: 'Enter Engineer ID',
+                },
+
+                 {
+                    type: 'input',
+                    name: 'engineeremail',
+                    message: 'Enter Engineer Email',
                 },
 
                 {
@@ -65,7 +71,7 @@ const rolesQuestions = () => {
             ]).then(answers => {
                 // after each answer create a new Engineer variable
                 // push values into the profile array
-                let engineer = new Engineer(answers.engineername, answers.engineeremail, answers.engineereid, answers.engineergithub);
+                let engineer = new Engineer(answers.engineername, answers.engineereid, answers.engineeremail, answers.engineergithub);
                 // console.log(engineer);
                 profile.push(engineer);
                 // console.log(profile);
@@ -95,17 +101,20 @@ const rolesQuestions = () => {
                     name: "internname",
                     message: "Enter Intern Name"
                 },
-                {
-                    type: 'input',
-                    name: 'internemail',
-                    message: 'Enter Intern Email',
-                },
 
                 {
                     type: 'input',
                     name: 'internid',
                     message: 'Enter Intern Id',
                 },
+
+
+                {
+                    type: 'input',
+                    name: 'internemail',
+                    message: 'Enter Intern Email',
+                },
+
 
                 {
                     type: 'input',
@@ -120,9 +129,10 @@ const rolesQuestions = () => {
                 }
             ]).then(answers => {
             
-                let intern = new Intern(answers.internname, answers.internemail, answers.internid, answers.school);
+                let intern = new Intern(answers.internname, answers.internid, answers.internemail,  answers.school);
                 // console.log(intern);
                 profile.push(intern);
+                // console.log(profile);
 
                 if (answers.anotherprofile === "Yes") {
                     rolesQuestions();
@@ -143,24 +153,24 @@ const rolesQuestions = () => {
                 {
                     type: "input",
                     name: "managername",
-                    message: "enter manager name"
+                    message: "Enter Manager Name"
                 },
                 {
                     type: 'input',
                     name: 'manageremail',
-                    message: 'Enter Email',
+                    message: 'Enter Manager Email',
                 },
 
                 {
                     type: 'input',
                     name: 'managerid',
-                    message: 'Enter id',
+                    message: 'Enter Manager Id',
                 },
 
                 {
                     type: 'input',
                     name: 'phone',
-                    message: 'Enter phone',
+                    message: 'Enter Manager Phone',
                 },
                 {
                     type: 'list',
