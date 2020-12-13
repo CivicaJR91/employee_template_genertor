@@ -1,5 +1,5 @@
 # employee_template_genertor
-Generate a README file using node.js
+Generate profiles HTML file using node.js
 
 # Criteria provided by client:
 A user wants to create an HTML file using a command line application to have access to the team information. The user wants to capture information for the roles: Engineer, Intern, and Manager. The application should allow to generate one or multiple roles.
@@ -12,10 +12,14 @@ A user wants to create an HTML file using a command line application to have acc
 * The "TEAM.HMTL" will be created under the outout folder
 
 # Animated GIF of the application
-![GIF](./image/GENERATE_READ_ME_FILE.gif)
+
+![GIF](./images/team_template_video.gif)
 
 # TEAM file example
-![GIF](./image/GENERATE_READ_ME_FILE.gif)
+
+![HTML_SCREENSHOT](./images/team_template_html.png)
 
 # Repository
-* Repository: https://github.com/CivicaJR91/readme_file_generator
+* Repository: https://github.com/CivicaJR91/employee_template_genertor
+* Employee_Template_Video: https://drive.google.com/file/d/1lDX8H4I8nQcoYz1fzXp5ERToJcmjnRQQ/view?usp=sharing
+* Profile Repository: https://civicajr91.github.io/Janliz-Suarez-Portfolio/
